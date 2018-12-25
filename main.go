@@ -71,7 +71,7 @@ func main() {
 
 	same := Same("record/data", air.Aqi)
 
-	if !isToday && !same {
+	if !isToday || !same {
 		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
 			"application/x-www-form-urlencoded",
 			strings.NewReader("chat_id=-321414996&text=pm2.5区间变动，目前是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
