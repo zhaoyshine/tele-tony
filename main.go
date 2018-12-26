@@ -22,7 +22,7 @@ func IsToday(filename string, day int) bool {
 	recordDate, _ := strconv.Atoi(record)
 	if day != recordDate {
 		result = false
-		fileOperation.WriteFile("record/time", strconv.Itoa(day))
+		fileOperation.WriteFile("/home/tele-tony/record/time", strconv.Itoa(day))
 	}
 
 	return result
@@ -51,7 +51,7 @@ func Same(filename string, aqi int) bool {
 		result = false
 	}
 
-	fileOperation.WriteFile("record/data", strconv.Itoa(aqi))
+	fileOperation.WriteFile("/home/tele-tony/record/data", strconv.Itoa(aqi))
 	return result
 }
 
@@ -71,9 +71,14 @@ func main() {
 
 	same := Same("/home/tele-tony/record/data", air.Aqi)
 
-	if !isToday || !same {
+	if !same {
 		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
 			"application/x-www-form-urlencoded",
 			strings.NewReader("chat_id=-321414996&text=pm2.5区间变动，目前是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
+	}
+	if !isToday {
+		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
+			"application/x-www-form-urlencoded",
+			strings.NewReader("chat_id=-321414996&text=新的一天！现在的pm2.5是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
 	}
 }
