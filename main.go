@@ -57,7 +57,7 @@ func Same(filename string, aqi int) bool {
 
 func main() {
 	today := time.Now().Day()
-	isToday := IsToday("record/time", today)
+	isToday := IsToday("/home/tele-tony/record/time", today)
 	//获取pm2.5的值
 	resp, _ := http.Get("http://aqicn.org/aqicn/json/android/shanghai/json")
 	defer resp.Body.Close()
@@ -69,7 +69,7 @@ func main() {
 	defer saying.Body.Close()
 	sayingBody, _ := ioutil.ReadAll(saying.Body)
 
-	same := Same("record/data", air.Aqi)
+	same := Same("/home/tele-tony/record/data", air.Aqi)
 
 	if !isToday || !same {
 		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
