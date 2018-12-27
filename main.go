@@ -45,11 +45,11 @@ func main() {
 	same := gadget.Same("/home/tele-tony/record/data", aqi)
 
 	if !isToday {
-		say := "新的一天！今天的空气质量是" + string(aqi) + "。\n当前比特币价格为 " + btc + "。\n" + saying
+		say := "新的一天！今天的空气质量是" + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
 		SendMessage(say)
 	}
 	if !same {
-		say := "空气质量区间变动 " + string(aqi) + "。\n当前比特币价格为 " + btc + "。\n" + saying
+		say := "空气质量区间变动 " + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
 		SendMessage(say)
 	}
 }
