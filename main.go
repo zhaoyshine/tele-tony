@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"strings"
 	"tele-tony/fileOperation"
+	"fmt"
 )
 
 
@@ -58,6 +59,8 @@ func Same(filename string, aqi int) bool {
 func main() {
 	today := time.Now().Day()
 	isToday := IsToday("/home/tele-tony/record/time", today)
+	fmt.Println("is today")
+	fmt.Println(isToday)
 	//获取pm2.5的值
 	resp, _ := http.Get("http://aqicn.org/aqicn/json/android/shanghai/json")
 	defer resp.Body.Close()
@@ -70,6 +73,8 @@ func main() {
 	sayingBody, _ := ioutil.ReadAll(saying.Body)
 
 	same := Same("/home/tele-tony/record/data", air.Aqi)
+	fmt.Println("same")
+	fmt.Println(same)
 
 	if !same {
 		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
