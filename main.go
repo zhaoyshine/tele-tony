@@ -79,7 +79,7 @@ func main() {
 	if !same {
 		resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
 			"application/x-www-form-urlencoded",
-			strings.NewReader("chat_id=-321414996&text=pm2.5区间变动，目前是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
+			strings.NewReader("chat_id=-1001122390151&text=pm2.5区间变动，目前是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -87,10 +87,10 @@ func main() {
 		resBody, _ := ioutil.ReadAll(resp.Body)
 		fmt.Println(string(resBody))
 	}
-	if isToday {
+	if !isToday {
 		resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
 			"application/x-www-form-urlencoded",
-			strings.NewReader("chat_id=-321414996&text=新的一天！现在的pm2.5是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
+			strings.NewReader("chat_id=-1001122390151&text=新的一天！现在的pm2.5是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
 		if err != nil {
 			fmt.Println(err)
 		}
