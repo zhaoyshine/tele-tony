@@ -16,14 +16,14 @@ type AirQuality struct{
 }
 
 func IsToday(filename string, day int) bool {
-	result := true
+	result := false
 
 	record := fileOperation.ReadFile(filename)
 	recordDate, _ := strconv.Atoi(record)
-	if day != recordDate {
-		result = false
-		fileOperation.WriteFile("/home/tele-tony/record/time", strconv.Itoa(day))
+	if day == recordDate {
+		result = true
 	}
+	fileOperation.WriteFile("/home/tele-tony/record/time", strconv.Itoa(day))
 
 	return result
 }
