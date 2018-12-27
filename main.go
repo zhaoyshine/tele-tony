@@ -85,7 +85,7 @@ func main() {
 		}
 		defer resp.Body.Close()
 		resBody, _ := ioutil.ReadAll(resp.Body)
-		fmt.Println(resBody)
+		fmt.Println(string(resBody))
 	}
 	if !isToday {
 		resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
@@ -96,6 +96,6 @@ func main() {
 		}
 		defer resp.Body.Close()
 		resBody, _ := ioutil.ReadAll(resp.Body)
-		fmt.Println(resBody)
+		fmt.Println(string(resBody))
 	}
 }
