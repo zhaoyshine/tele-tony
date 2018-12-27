@@ -77,13 +77,25 @@ func main() {
 	fmt.Println(same)
 
 	if !same {
-		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
+		resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
 			"application/x-www-form-urlencoded",
 			strings.NewReader("chat_id=-321414996&text=pm2.5区间变动，目前是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer resp.Body.Close()
+		resBody, _ := ioutil.ReadAll(resp.Body)
+		fmt.Println(resBody)
 	}
 	if !isToday {
-		http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
+		resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
 			"application/x-www-form-urlencoded",
 			strings.NewReader("chat_id=-321414996&text=新的一天！现在的pm2.5是 "+strconv.Itoa(air.Aqi)+"。 \n"+string(sayingBody)))
+		if err != nil {
+			fmt.Println(err)
+		}
+		defer resp.Body.Close()
+		resBody, _ := ioutil.ReadAll(resp.Body)
+		fmt.Println(resBody)
 	}
 }
