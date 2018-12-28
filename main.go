@@ -7,8 +7,8 @@ import (
 	"strings"
 	"tele-tony/fileOperation"
 	"fmt"
-	"tele-tony/gadget"
 	"time"
+	"tele-tony/gadget"
 )
 
 func IsToday(filename string, day int) bool {
@@ -39,17 +39,18 @@ func SendMessage(say string)  {
 func main() {
 	today := time.Now().Day()
 	aqi := gadget.GetAqi()
-	saying := gadget.GetSay()
 	btc := gadget.GetBtc()
 	isToday := IsToday("/home/tele-tony/record/time", today)
 	same := gadget.Same("/home/tele-tony/record/data", aqi)
 
 	if !isToday {
-		say := "新的一天！今天的空气质量是" + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
+		saying := gadget.GetSay()
+		say := "新的一天！现在的的pm2.5是" + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
 		SendMessage(say)
 	}
 	if !same {
-		say := "空气质量区间变动 " + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
+		saying := gadget.GetSay()
+		say := "现在的的pm2.5 " + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
 		SendMessage(say)
 	}
 }

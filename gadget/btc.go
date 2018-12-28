@@ -3,8 +3,8 @@ package gadget
 import (
 	"net/http"
 	"io/ioutil"
-	"github.com/henrylee2cn/pholcus/common/simplejson"
 	"strconv"
+	"github.com/henrylee2cn/pholcus/common/simplejson"
 )
 
 func GetBtc() string {
