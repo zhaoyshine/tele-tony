@@ -62,5 +62,8 @@ func main() {
 	}
 	if !same && isToday {
 		SendPhoto(wgt)
+		saying := gadget.GetSay()
+		say := "当前比特币价格为 " + btc + "。\n" + saying
+		SendMessage(say)
 	}
 }
