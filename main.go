@@ -37,7 +37,7 @@ func SendMessage(say string)  {
 }
 
 func SendPhoto(wgt string)  {
-	resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
+	resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendPhoto",
 		"application/x-www-form-urlencoded",
 		strings.NewReader("chat_id=-1001122390151&photo="+ wgt))
 	if err != nil {
