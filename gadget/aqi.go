@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"net/http"
 	"io/ioutil"
-	"encoding/json"
+	"github.com/henrylee2cn/pholcus/common/simplejson"
 )
 
 type AirQuality struct{
@@ -32,12 +32,17 @@ func Same(filename string, aqi int) bool {
 	return result
 }
 
-func GetAqi() int {
+func GetAqi() (aqi int, wgt string ) {
 	resp, _ := http.Get("http://aqicn.org/aqicn/json/android/shanghai/json")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	var air AirQuality
-	json.Unmarshal(body, &air)
+	js, err := simplejson.NewJson(body)
+	if err != nil {
+		panic(err.Error())
+	}
 
-	return air.Aqi
+	aqiq := js.Get("aqi").MustInt();
+	wgtq := js.Get("wgt").MustString();
+
+	return aqiq, wgtq
 }
