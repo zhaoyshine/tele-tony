@@ -56,7 +56,7 @@ func main() {
 	same := gadget.Same("/home/tele-tony/record/data", aqi)
 
 	if !isToday {
-		saying := gadget.GetSay()
+		// saying := gadget.GetSay()
 		say := "新的一天！现在的的pm2.5是" + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
 		SendMessage(say)
 	}
