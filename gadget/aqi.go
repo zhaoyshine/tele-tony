@@ -19,11 +19,11 @@ func Same(filename string, aqi int) bool {
 
 	switch {
 	case recordDate > 300 && aqi > 300 :
-	case recordDate > 201 && aqi > 201 && recordDate < 300 && aqi < 300 :
-	case recordDate > 151 && aqi > 151 && recordDate < 201 && aqi < 201 :
-	case recordDate > 101 && aqi > 101 && recordDate < 151 && aqi < 151 :
-	case recordDate > 51 && aqi > 51 && recordDate < 101 && aqi < 101 :
-	case recordDate > 0 && aqi > 0 && recordDate < 51 && aqi < 51 :
+	case recordDate > 201 && aqi > 201 && recordDate <= 300 && aqi <= 300 :
+	case recordDate > 151 && aqi > 151 && recordDate <= 201 && aqi <= 201 :
+	case recordDate > 101 && aqi > 101 && recordDate <= 151 && aqi <= 151 :
+	case recordDate > 51 && aqi > 51 && recordDate <= 101 && aqi <= 101 :
+	case recordDate > 0 && aqi > 0 && recordDate <= 51 && aqi <= 51 :
 	default:
 		result = false
 	}
