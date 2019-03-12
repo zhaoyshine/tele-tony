@@ -29,20 +29,20 @@ func Same(filename string, aqi int) bool {
 		result = false
 	}
 
-	fileOperation.WriteFile("/home/tele-tony/record/data", strconv.Itoa(aqi))
+	fileOperation.WriteFile("./record/data", strconv.Itoa(aqi))
 	return result
 }
 
 func GetAqi() (aqi int, wgt string ) {
-	var aq AirQuality
+	var aq map[string]interface{}
 	resp, _ := http.Get("http://aqicn.org/aqicn/json/android/shanghai/json")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
 	json.Unmarshal(body, &aq)
 
-	aqiq := aq.Aqi
-	wgtq := aq.Wgt
+	aqiq := int(aq["aqi"].(float64))
+	wgtq := aq["wgt"].(string)
 
 	return aqiq, wgtq
 }

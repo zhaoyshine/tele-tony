@@ -19,7 +19,7 @@ func IsToday(filename string, day int) bool {
 	if day == recordDate {
 		result = true
 	}
-	fileOperation.WriteFile("/home/tele-tony/record/time", strconv.Itoa(day))
+	fileOperation.WriteFile("./record/time", strconv.Itoa(day))
 
 	return result
 }
@@ -50,20 +50,34 @@ func SendPhoto(wgt string)  {
 
 func main() {
 	today := time.Now().Day()
+	fmt.Println("------------------1")
 	aqi, wgt := gadget.GetAqi()
+	fmt.Println("------------------2")
 	btc := gadget.GetBtc()
-	isToday := IsToday("/home/tele-tony/record/time", today)
-	same := gadget.Same("/home/tele-tony/record/data", aqi)
+	fmt.Println("------------------3")
+	isToday := IsToday("./record/time", today)
+	fmt.Println("------------------4")
+	same := gadget.Same("./record/data", aqi)
+	fmt.Println("------------------5")
 
 	if !isToday {
+		fmt.Println("------------------6")
 		saying := gadget.GetSay()
+		fmt.Println("------------------7")
 		say := "新的一天！现在的的pm2.5是" + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
+		fmt.Println("------------------8")
 		SendMessage(say)
+		fmt.Println("------------------9")
 	}
 	if !same && isToday {
+		fmt.Println("------------------10")
 		SendPhoto(wgt)
+		fmt.Println("------------------11")
 		saying := gadget.GetSay()
+		fmt.Println("------------------12")
 		say := "当前比特币价格为 " + btc + "。\n" + saying
+		fmt.Println("------------------13")
 		SendMessage(say)
+		fmt.Println("------------------14")
 	}
 }
