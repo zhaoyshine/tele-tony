@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"net/http"
 	"io/ioutil"
-	"github.com/henrylee2cn/pholcus/common/simplejson"
+  "github.com/mailru/easyjson"
 )
 
 type AirQuality struct{
