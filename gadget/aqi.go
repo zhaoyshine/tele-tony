@@ -5,11 +5,12 @@ import (
 	"strconv"
 	"net/http"
 	"io/ioutil"
-  "github.com/mailru/easyjson"
+	"encoding/json"
 )
 
 type AirQuality struct{
 	Aqi       int  `json:"aqi"`
+	Wgt		  string `json:"wgt"`
 }
 
 func Same(filename string, aqi int) bool {
@@ -33,16 +34,15 @@ func Same(filename string, aqi int) bool {
 }
 
 func GetAqi() (aqi int, wgt string ) {
+	var aq AirQuality
 	resp, _ := http.Get("http://aqicn.org/aqicn/json/android/shanghai/json")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
-	js, err := simplejson.NewJson(body)
-	if err != nil {
-		panic(err.Error())
-	}
 
-	aqiq := js.Get("aqi").MustInt();
-	wgtq := js.Get("wgt").MustString();
+	json.Unmarshal(body, &aq)
+
+	aqiq := aq.Aqi
+	wgtq := aq.Wgt
 
 	return aqiq, wgtq
 }
