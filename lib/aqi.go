@@ -1,8 +1,6 @@
 package lib
 
 import (
-	"tele-tony/fileOperation"
-	"strconv"
 	"net/http"
 	"io/ioutil"
 	"encoding/json"
@@ -13,27 +11,23 @@ type AirQuality struct{
 	Wgt		  string `json:"wgt"`
 }
 
-func Same(filename string, aqi int) bool {
+func IsSameAqi(record int, aqi int) bool {
 	result := true
-	record := fileOperation.ReadFile(filename)
-	recordDate, _ := strconv.Atoi(record)
 
 	switch {
-	case recordDate > 300 && aqi > 300 :
-	case recordDate > 201 && aqi > 201 && recordDate <= 300 && aqi <= 300 :
-	case recordDate > 151 && aqi > 151 && recordDate <= 201 && aqi <= 201 :
-	case recordDate > 101 && aqi > 101 && recordDate <= 151 && aqi <= 151 :
-	case recordDate > 51 && aqi > 51 && recordDate <= 101 && aqi <= 101 :
-	case recordDate > 0 && aqi > 0 && recordDate <= 51 && aqi <= 51 :
+	case record > 300 && aqi > 300 :
+	case record > 201 && aqi > 201 && record <= 300 && aqi <= 300 :
+	case record > 151 && aqi > 151 && record <= 201 && aqi <= 201 :
+	case record > 101 && aqi > 101 && record <= 151 && aqi <= 151 :
+	case record > 51 && aqi > 51 && record <= 101 && aqi <= 101 :
+	case record > 0 && aqi > 0 && record <= 51 && aqi <= 51 :
 	default:
 		result = false
 	}
-
-	fileOperation.WriteFile("./record/data", strconv.Itoa(aqi))
 	return result
 }
 
-func GetAqi() (aqi int, wgt string ) {
+func XAqi() (aqi int, wgt string ) {
 	var aq map[string]interface{}
 	resp, _ := http.Get("http://aqicn.org/aqicn/json/android/shanghai/json")
 	defer resp.Body.Close()

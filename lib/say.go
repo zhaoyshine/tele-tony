@@ -3,18 +3,25 @@ package lib
 import (
 	"net/http"
 	"io/ioutil"
-	"github.com/henrylee2cn/pholcus/common/simplejson"
+	"encoding/json"
 )
 
-func GetSay() string {
-	saying, _ := http.Get("https://v2.jinrishici.com/one.json")
-	defer saying.Body.Close()
-	sayingBody, _ := ioutil.ReadAll(saying.Body)
-	js, err := simplejson.NewJson(sayingBody)
-	if err != nil {
-		panic(err.Error())
-	}
-	say := js.Get("data").Get("content").MustString()
+type saycontent struct {
+	Content string `json:"content"`
+}
 
-	return say
+type SayResult struct{
+	Data saycontent `json:"data"`
+}
+
+func XSay() string {
+	resp, _ := http.Get("https://v2.jinrishici.com/one.json")
+	defer resp.Body.Close()
+
+	body, _ := ioutil.ReadAll(resp.Body)
+
+	var XS SayResult
+	json.Unmarshal(body, &XS)
+
+	return XS.Data.Content
 }
