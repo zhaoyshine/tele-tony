@@ -1,4 +1,4 @@
-package gadget
+package lib
 
 import (
 	"net/http"
