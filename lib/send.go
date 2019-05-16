@@ -33,7 +33,7 @@ func Send (wgt, btc, say string ) {
 	msg.Msgtype = "news"
 	article.Title = say
 	article.Description = "当前比特币价格为: " + btc
-	article.Url = "app.pipup.me/admin"
+	article.Url = "check_yesterday_logistics_sera"
 	article.Picurl = wgt
 	msg.News.Articles = append(msg.News.Articles, article)
 

@@ -25,6 +25,6 @@ func XBtc() string {
 	var XB BtcResult
 	json.Unmarshal(body, &XB)
 
-	return XB.CNY.Symbol + strconv.FormatFloat(float64(XB.CNY.Price), 'f', 6, 64)
+	return XB.CNY.Symbol + strconv.FormatFloat(float64(XB.CNY.Price), 'f', 1, 64)
 
 }
