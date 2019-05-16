@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"time"
 	"tele-tony/gadget"
+	"net/url"
 )
 
 func IsToday(filename string, day int) bool {
@@ -25,9 +26,7 @@ func IsToday(filename string, day int) bool {
 }
 
 func SendMessage(say string)  {
-	resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendMessage",
-		"application/x-www-form-urlencoded",
-		strings.NewReader("chat_id=-1001122390151&text="+ say))
+	resp, err := http.PostForm("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=15e669e8-0ba6-4269-8e25-9e4483256ed3",
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -37,8 +36,8 @@ func SendMessage(say string)  {
 }
 
 func SendPhoto(wgt string)  {
-	resp, err := http.Post("https://api.telegram.org/bot705617182:AAHyw5JrrlWCQf-D2l5X1fLtXJE8plJqtOU/sendPhoto",
-		"application/x-www-form-urlencoded",
+	resp, err := http.Post("https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=15e669e8-0ba6-4269-8e25-9e4483256ed3",
+		"Content-Type: application/json",
 		strings.NewReader("chat_id=-1001122390151&photo="+ wgt))
 	if err != nil {
 		fmt.Println(err)
@@ -50,34 +49,20 @@ func SendPhoto(wgt string)  {
 
 func main() {
 	today := time.Now().Day()
-	fmt.Println("------------------1")
 	aqi, wgt := gadget.GetAqi()
-	fmt.Println("------------------2")
 	btc := gadget.GetBtc()
-	fmt.Println("------------------3")
 	isToday := IsToday("./record/time", today)
-	fmt.Println("------------------4")
 	same := gadget.Same("./record/data", aqi)
-	fmt.Println("------------------5")
 
 	if !isToday {
-		fmt.Println("------------------6")
 		saying := gadget.GetSay()
-		fmt.Println("------------------7")
 		say := "新的一天！现在的的pm2.5是" + strconv.Itoa(aqi) + "\n当前比特币价格为 " + btc + "。\n" + saying
-		fmt.Println("------------------8")
 		SendMessage(say)
-		fmt.Println("------------------9")
 	}
 	if !same && isToday {
-		fmt.Println("------------------10")
 		SendPhoto(wgt)
-		fmt.Println("------------------11")
 		saying := gadget.GetSay()
-		fmt.Println("------------------12")
 		say := "当前比特币价格为 " + btc + "。\n" + saying
-		fmt.Println("------------------13")
 		SendMessage(say)
-		fmt.Println("------------------14")
 	}
 }
