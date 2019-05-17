@@ -1,18 +1,18 @@
 package lib
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"bytes"
 	"io/ioutil"
+	"net/http"
 )
 
 type Article struct {
-	Title string `json:"title"`
+	Title       string `json:"title"`
 	Description string `json:"description"`
-	Url string `json:"url"`
-	Picurl string `json:"picurl"`
+	Url         string `json:"url"`
+	Picurl      string `json:"picurl"`
 }
 
 type news struct {
@@ -21,11 +21,10 @@ type news struct {
 
 type Msg struct {
 	Msgtype string `json:"msgtype"`
-	News news `json:"news"`
+	News    news   `json:"news"`
 }
 
-
-func Send (wgt, btc, say string ) {
+func Send(wgt, btc, say string) {
 	url := "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=15e669e8-0ba6-4269-8e25-9e4483256ed3"
 	var msg Msg
 	var article Article
@@ -33,7 +32,7 @@ func Send (wgt, btc, say string ) {
 	msg.Msgtype = "news"
 	article.Title = say
 	article.Description = "当前比特币价格为: " + btc
-	article.Url = "check_yesterday_logistics_sera"
+	article.Url = "https://github.com/trending"
 	article.Picurl = wgt
 	msg.News.Articles = append(msg.News.Articles, article)
 

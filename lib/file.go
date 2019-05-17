@@ -1,8 +1,8 @@
 package lib
 
 import (
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strconv"
 )
@@ -22,5 +22,6 @@ func WriteFile(path string, record int) {
 		panic(err)
 	}
 	defer file.Close()
-	file.WriteString(string(record))
+	t := strconv.Itoa(record)
+	file.WriteString(t)
 }

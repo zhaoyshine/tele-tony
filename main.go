@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"time"
 	"tony/lib"
 )
 
-func main()  {
+func main() {
 	today := time.Now().Day()
 
 	loadDay := lib.LoadFile("day")
@@ -17,6 +18,8 @@ func main()  {
 
 	isNewday := lib.IsNewDay(loadDay, today)
 	isSameaqi := lib.IsSameAqi(loadAqi, aqi)
+	fmt.Println(isNewday)
+	fmt.Println(isSameaqi)
 	if isNewday || !isSameaqi {
 		lib.WriteFile("aqi", aqi)
 		lib.WriteFile("day", today)
