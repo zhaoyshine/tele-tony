@@ -9,8 +9,8 @@ import (
 func main() {
 	today := time.Now().Day()
 
-	loadDay := lib.LoadFile("day")
-	loadAqi := lib.LoadFile("aqi")
+	loadDay := lib.LoadFile("/home/tele-tony/day")
+	loadAqi := lib.LoadFile("/home/tele-tony/aqi")
 
 	aqi, wgt := lib.XAqi()
 	btc := lib.XBtc()
@@ -21,8 +21,8 @@ func main() {
 	fmt.Println(isNewday)
 	fmt.Println(isSameaqi)
 	if isNewday || !isSameaqi {
-		lib.WriteFile("aqi", aqi)
-		lib.WriteFile("day", today)
+		lib.WriteFile("/home/tele-tony/aqi", aqi)
+		lib.WriteFile("/home/tele-tony/day", today)
 		lib.Send(wgt, btc, say)
 	}
 }
