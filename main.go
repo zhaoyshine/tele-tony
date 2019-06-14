@@ -1,8 +1,9 @@
 package main
 
 import (
-	"time"
 	"tony/lib"
+	"strconv"
+	"time"
 )
 
 func main() {
@@ -14,7 +15,6 @@ func main() {
 
 	isNewday := lib.IsNewDay(loadDay, today)
 	isSameaqi := lib.IsSameAqi(loadAqi, aqi)
-
 	if isNewday || !isSameaqi {
 
 		btc := lib.XBtc()
@@ -23,6 +23,7 @@ func main() {
 
 		lib.WriteFile("/home/tele-tony/aqi", aqi)
 		lib.WriteFile("/home/tele-tony/day", today)
-		lib.Send(wgt, btc, say, string(aqi))
+
+		lib.Send(wgt, btc, say, strconv.Itoa(aqi))
 	}
 }

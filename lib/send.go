@@ -31,7 +31,7 @@ func Send(wgt, btc, say, aqi string) {
 
 	msg.Msgtype = "news"
 	article.Title = say
-	article.Description = "当前比特币价格为: " + btc + "\n 当前空气质量为: " + aqi
+	article.Description = "当前比特币价格为: " + btc + "\n当前空气质量为: " + aqi
 	article.Url = "https://github.com/trending"
 	article.Picurl = wgt
 	msg.News.Articles = append(msg.News.Articles, article)
