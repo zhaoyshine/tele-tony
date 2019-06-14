@@ -1,28 +1,28 @@
 package main
 
 import (
-	"fmt"
 	"time"
 	"tony/lib"
 )
 
 func main() {
+	aqi, _ := lib.XAqi()
 	today := time.Now().Day()
 
 	loadDay := lib.LoadFile("/home/tele-tony/day")
 	loadAqi := lib.LoadFile("/home/tele-tony/aqi")
 
-	aqi, wgt := lib.XAqi()
-	btc := lib.XBtc()
-	say := lib.XSay()
-
 	isNewday := lib.IsNewDay(loadDay, today)
 	isSameaqi := lib.IsSameAqi(loadAqi, aqi)
-	fmt.Println(isNewday)
-	fmt.Println(isSameaqi)
+
 	if isNewday || !isSameaqi {
+
+		btc := lib.XBtc()
+		say := lib.XSay()
+		wgt := lib.XBingpic()
+
 		lib.WriteFile("/home/tele-tony/aqi", aqi)
 		lib.WriteFile("/home/tele-tony/day", today)
-		lib.Send(wgt, btc, say)
+		lib.Send(wgt, btc, say, string(aqi))
 	}
 }

@@ -24,14 +24,14 @@ type Msg struct {
 	News    news   `json:"news"`
 }
 
-func Send(wgt, btc, say string) {
+func Send(wgt, btc, say, aqi string) {
 	url := "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=15e669e8-0ba6-4269-8e25-9e4483256ed3"
 	var msg Msg
 	var article Article
 
 	msg.Msgtype = "news"
 	article.Title = say
-	article.Description = "当前比特币价格为: " + btc
+	article.Description = "当前比特币价格为: " + btc + "\n 当前空气质量为: " + aqi
 	article.Url = "https://github.com/trending"
 	article.Picurl = wgt
 	msg.News.Articles = append(msg.News.Articles, article)
