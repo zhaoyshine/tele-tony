@@ -25,6 +25,6 @@ func main() {
 		lib.WriteFile("/home/tele-tony/aqi", aqi)
 		lib.WriteFile("/home/tele-tony/day", today)
 
-		lib.Send(wgt, btc, say, strconv.Itoa(aqi), isNewday)
+		lib.Send(wgt, btc, say, strconv.Itoa(aqi))
 	}
 }

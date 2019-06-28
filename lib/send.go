@@ -24,17 +24,13 @@ type Msg struct {
 	News    news   `json:"news"`
 }
 
-func Send(wgt, btc, say, aqi string, isNewday bool) {
+func Send(wgt, btc, say, aqi string) {
 	url := "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=15e669e8-0ba6-4269-8e25-9e4483256ed3"
 	var msg Msg
 	var article Article
 
 	msg.Msgtype = "news"
-	if isNewday {
-		article.Title = "线上puma服务请升级到4.0解决部署问题"
-	} else {
-		article.Title = say
-	}
+	article.Title = say
 	article.Description = "当前比特币价格为: " + btc + "\n当前空气质量为: " + aqi
 	article.Url = "https://github.com/trending"
 	article.Picurl = wgt
